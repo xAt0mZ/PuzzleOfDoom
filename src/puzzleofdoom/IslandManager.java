@@ -26,6 +26,14 @@ public class IslandManager {
 		Debug.Log("New Island manager");
 	}
 
+	public void run() {
+		generate();
+	}
+
+	private void evaluate() {
+
+	}
+
 	private void generate() {
 		for (int i = 0; i < islandsCount; i++) {
 			Island island = new Island(i, boardsCount, piecesCount);
@@ -33,13 +41,4 @@ public class IslandManager {
 			islands.add(island);
 		}
 	}
-
-	private void evaluate() {
-
-	}
-
-	public void run() {
-		generate();
-	}
-
 }
