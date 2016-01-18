@@ -2,16 +2,19 @@ package puzzleofdoom;
 
 public class Piece {
 	public int number;
-	public int[] colors;
+	public int position;
+	public Direction direction;
 
 	/**
 	 * 
+	 * @param pos : position on board
 	 * @param num : piece number
-	 * @param col : piece colors
+	 * @param dir : piece orientation
 	 */
-	public Piece(int num, int[] col) {
+	public Piece(int pos, int num, Direction dir) {
+		position = pos;
 		number = num;
-		colors = col;
-		Debug.Log("        -- New Piece " + number);
+		direction = dir;
+		DebugHelper.Log("        -- New Piece --  position=" + position + "  number=" + number + "  direction=" + direction);
 	}
 }

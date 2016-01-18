@@ -23,22 +23,24 @@ public class IslandManager {
 		piecesCount = pieces;
 		boardsCount = boards;
 		islands = new ArrayList<Island>();
-		Debug.Log("New Island manager");
 	}
 
 	public void run() {
+		DebugHelper.Log("IslandManager Running");
 		generate();
-	}
-
-	private void evaluate() {
-
+		// evaluate();
+		// crossover();
+		// kill();
+		// migrate();
 	}
 
 	private void generate() {
+		DebugHelper.Log("Generating islands");
 		for (int i = 0; i < islandsCount; i++) {
 			Island island = new Island(i, boardsCount, piecesCount);
 			island.generate();
 			islands.add(island);
 		}
+		DebugHelper.Log("End of generation");
 	}
 }

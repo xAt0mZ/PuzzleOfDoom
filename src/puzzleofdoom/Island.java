@@ -20,7 +20,7 @@ public class Island {
 		piecesCount = pCount;
 		boardsCount = bCount;
 		boards = new ArrayList<Board>();
-		Debug.Log("  -- New Island " + number);
+		DebugHelper.Log("  -- New Island " + number);
 	}
 
 	public void generate() {

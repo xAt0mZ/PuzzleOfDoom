@@ -7,10 +7,10 @@ public class Main {
 	private static Long pieces = new Long(256);
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		DebugHelper.Log("[BEGIN OF PROGRAM]");
 		IslandManager manager = new IslandManager(islands, boards, pieces);
 		manager.run();
+		DebugHelper.Log("[END OF PROGRAM]");
 	}
 
 }

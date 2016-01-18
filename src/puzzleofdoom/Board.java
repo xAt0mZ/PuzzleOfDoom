@@ -19,12 +19,13 @@ public class Board {
 		piecesCount = pCount;
 		pieces = new ArrayList<Piece>();
 		rating = 0;
-		Debug.Log("      -- New Board " + number);
+		DebugHelper.Log("      -- New Board " + number);
 	}
 
 	public void generate() {
+		GeneratorHelper.resetPositionCounter();
 		for (int i = 0; i < piecesCount; i++) {
-			Piece piece = new Piece(i, new int[4]);
+			Piece piece = new Piece(i, GeneratorHelper.nextRandomPosition(), GeneratorHelper.randomDirection());
 			pieces.add(piece);
 		}
 	}
