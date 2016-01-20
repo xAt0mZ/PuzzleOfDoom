@@ -28,19 +28,27 @@ public class IslandManager {
 	public void run() {
 		DebugHelper.Log("IslandManager Running");
 		generate();
-		// evaluate();
+		evaluate();
 		// crossover();
 		// kill();
 		// migrate();
 	}
 
 	private void generate() {
-		DebugHelper.Log("Generating islands");
+		DebugHelper.LogWithStart("Generating islands");
 		for (int i = 0; i < islandsCount; i++) {
 			Island island = new Island(i, boardsCount, piecesCount);
 			island.generate();
 			islands.add(island);
 		}
-		DebugHelper.Log("End of generation");
+		DebugHelper.LogWithEnd("Generating islands");
+	}
+
+	private void evaluate() {
+		DebugHelper.LogWithStart("Evaluating islands");
+		for (Island island : islands) {
+			island.evaluate();
+		}
+		DebugHelper.LogWithEnd("Evaluating islands");
 	}
 }

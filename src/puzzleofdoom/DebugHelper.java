@@ -39,6 +39,11 @@ public final class DebugHelper {
 		}
 	}
 
+	private static void close() {
+		if (getInstance().writer != null)
+			getInstance().writer.close();
+	}
+	
 	public static void Log(String str) {
 		System.out.println(str);
 		getInstance().writer.println(str);
@@ -48,9 +53,16 @@ public final class DebugHelper {
 		System.out.println(integer);
 		getInstance().writer.println(integer);
 	}
-
-	private static void close() {
-		if (getInstance().writer != null)
-			getInstance().writer.close();
+	
+	public static void LogWithStart(String str) {
+		System.out.print("[START] ");
+		getInstance().writer.print("[START] ");
+		Log(str);
+	}
+	
+	public static void LogWithEnd(String str) {
+		System.out.print("[END] ");
+		getInstance().writer.print("[END] ");
+		Log(str);
 	}
 }

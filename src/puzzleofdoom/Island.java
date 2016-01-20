@@ -32,7 +32,11 @@ public class Island {
 	}
 	
 	public void evaluate() {
-		
+		DebugHelper.LogWithStart("Island " + number);
+		for (Board board : boards) {
+			board.evaluate();
+		}
+		DebugHelper.LogWithEnd("Island " + number);
 	}
 
 }

@@ -11,8 +11,10 @@ public class Board {
 
 	/**
 	 * 
-	 * @param num : board number
-	 * @param pCount : pieces count
+	 * @param num
+	 *            : board number
+	 * @param pCount
+	 *            : pieces count
 	 */
 	public Board(int num, Long pCount) {
 		number = num;
@@ -25,12 +27,27 @@ public class Board {
 	public void generate() {
 		GeneratorHelper.resetPositionCounter();
 		for (int i = 0; i < piecesCount; i++) {
-			Piece piece = new Piece(i, GeneratorHelper.nextRandomPosition(), GeneratorHelper.randomDirection());
+			Piece piece = new Piece(i, GeneratorHelper.nextRandomPosition(),
+					GeneratorHelper.randomDirection());
 			pieces.add(piece);
 		}
 	}
 
 	public void evaluate() {
-
+		DebugHelper.LogWithStart("Board " + number);
+		for (Piece piece : pieces) {
+			int x = piece.position % 16;
+			int y = piece.position / 16;
+			// TODO : PiecesHelper.getPieceColorsByNumber(piece.number);
+			if (x == 0)
+				;
+			else if (x == 15)
+				;
+			if (y == 0)
+				;
+			else if (y == 15)
+				;
+		}
+		DebugHelper.LogWithEnd("Board " + number);
 	}
 }
