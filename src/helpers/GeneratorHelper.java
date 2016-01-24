@@ -1,7 +1,9 @@
-package puzzleofdoom;
+package helpers;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import puzzleofdoom.Direction;
 
 public final class GeneratorHelper {
 

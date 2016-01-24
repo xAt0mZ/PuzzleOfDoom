@@ -1,5 +1,9 @@
 package puzzleofdoom;
 
+import helpers.DebugHelper;
+import helpers.GeneratorHelper;
+import helpers.PiecesHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +12,7 @@ public class Board {
 	public List<Piece> pieces;
 	public Long piecesCount;
 	public int rating;
+	public int life;
 
 	/**
 	 * 
@@ -21,6 +26,7 @@ public class Board {
 		piecesCount = pCount;
 		pieces = new ArrayList<Piece>();
 		rating = 0;
+		life = 5;
 		DebugHelper.Log("      -- New Board " + number);
 	}
 
@@ -38,7 +44,7 @@ public class Board {
 		for (Piece piece : pieces) {
 			int x = piece.position % 16;
 			int y = piece.position / 16;
-			// TODO : PiecesHelper.getPieceColorsByNumber(piece.number);
+			PiecesHelper.getPieceColorsByNumber(piece.number);
 			if (x == 0)
 				;
 			else if (x == 15)

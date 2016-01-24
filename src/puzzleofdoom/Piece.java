@@ -1,5 +1,7 @@
 package puzzleofdoom;
 
+import helpers.DebugHelper;
+
 public class Piece {
 	public int number;
 	public int position;

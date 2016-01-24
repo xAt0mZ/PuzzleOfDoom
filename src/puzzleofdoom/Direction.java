@@ -1,7 +1,7 @@
 package puzzleofdoom;
 
 public enum Direction {
-	NORTH(0), SOUTH(1), WEST(2), EAST(3);
+	NORTH(0), EAST(1), SOUTH(2), WEST(3);
 	private int value;
 
 	private Direction(int val) {

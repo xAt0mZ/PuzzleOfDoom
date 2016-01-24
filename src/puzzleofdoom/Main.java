@@ -1,5 +1,7 @@
 package puzzleofdoom;
 
+import helpers.DebugHelper;
+
 public class Main {
 
 	private static Long islands = new Long(10);

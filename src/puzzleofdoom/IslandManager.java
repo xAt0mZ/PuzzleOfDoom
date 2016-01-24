@@ -1,5 +1,7 @@
 package puzzleofdoom;
 
+import helpers.DebugHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class IslandManager {
 		generate();
 		evaluate();
 		// crossover();
-		// kill();
+		// selection();
 		// migrate();
 	}
 
@@ -51,4 +53,12 @@ public class IslandManager {
 		}
 		DebugHelper.LogWithEnd("Evaluating islands");
 	}
+	
+	private void selection(){
+		DebugHelper.LogWithStart("Selectioning boards");
+		for (Island island : islands) {
+			island.selection();
+		}
+	}
+	
 }
