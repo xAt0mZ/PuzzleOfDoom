@@ -1,11 +1,13 @@
 package puzzleofdoom;
 
 import helpers.DebugHelper;
+import helpers.PiecesHelper;
 
 public class Piece {
 	public int number;
 	public int position;
 	public Direction direction;
+	public int[] colors;
 
 	/**
 	 * 
@@ -20,7 +22,11 @@ public class Piece {
 		position = pos;
 		number = num;
 		direction = dir;
-		DebugHelper.Log("        -- New Piece --  position=" + position
-				+ "  number=" + number + "  direction=" + direction);
+		colors = PiecesHelper.getPieceColors(this);
+		DebugHelper.Log("    -- num:" + num + "  dir:" + dir + "   N="
+				+ colors[Direction.NORTH.getValue()] + "  E="
+				+ colors[Direction.EAST.getValue()] + "  S="
+				+ colors[Direction.SOUTH.getValue()] + "  W="
+				+ colors[Direction.WEST.getValue()]);
 	}
 }

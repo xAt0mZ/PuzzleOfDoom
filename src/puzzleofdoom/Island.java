@@ -48,7 +48,7 @@ public class Island {
 	}
 	
 	public void selection(){
-		int	remainingToSelect = 10; //Remplacer la valeur par une macro / repr�sente le nombre de board restant � selectionner
+		int	remainingToSelect = 2; //Remplacer la valeur par une macro / repr�sente le nombre de board restant � selectionner
 		long minValue = 1;
 		long maxValue = boardsCount+1;
 		long random;

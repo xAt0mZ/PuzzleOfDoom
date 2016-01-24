@@ -30,9 +30,9 @@ public class IslandManager {
 	public void run() {
 		DebugHelper.Log("IslandManager Running");
 		generate();
-		// evaluate();
+		evaluate();
 		// crossover();
-		 selection();
+		selection();
 		// migrate();
 	}
 
@@ -53,12 +53,12 @@ public class IslandManager {
 		}
 		DebugHelper.LogWithEnd("Evaluating islands");
 	}
-	
-	private void selection(){
+
+	private void selection() {
 		DebugHelper.LogWithStart("Selectioning boards");
 		for (Island island : islands) {
 			island.selection();
 		}
 	}
-	
+
 }

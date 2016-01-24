@@ -48,15 +48,15 @@ public final class PiecesHelper {
 		}
 
 		// debug
-		DebugHelper.Log("");
-		Iterator it = colorsSave.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
-			int[] tab = (int[]) pair.getValue();
-			DebugHelper.Log(pair.getKey() + " = [" + tab[0] + "][" + tab[1]
-					+ "][" + tab[2] + "][" + tab[3] + "]");
-		}
-		DebugHelper.Log("");
+//		DebugHelper.Log("");
+//		Iterator it = colorsSave.entrySet().iterator();
+//		while (it.hasNext()) {
+//			Map.Entry pair = (Map.Entry) it.next();
+//			int[] tab = (int[]) pair.getValue();
+//			DebugHelper.Log(pair.getKey() + " = [" + tab[0] + "][" + tab[1]
+//					+ "][" + tab[2] + "][" + tab[3] + "]");
+//		}
+//		DebugHelper.Log("");
 		// end debug
 	}
 
