@@ -44,6 +44,11 @@ public final class DebugHelper {
 			getInstance().writer.close();
 	}
 	
+	public static void LogWithoutNewline(String str) {
+		System.out.print(str);
+		getInstance().writer.print(str);
+	}
+	
 	public static void Log(String str) {
 		System.out.println(str);
 		getInstance().writer.println(str);

@@ -12,7 +12,6 @@ public class Island {
 	public List<Board> boards;
 	public Long boardsCount;
 	public Long piecesCount;
-	public List<Board> boardListSelect;
 	public List<Board> selectedBoards;
 	public int selectionNumber = 10;
 
@@ -27,9 +26,6 @@ public class Island {
 		piecesCount = pCount;
 		boardsCount = bCount;
 		boards = new ArrayList<Board>();
-		boardListSelect = new ArrayList<Board>();
-		selectedBoards = new ArrayList<Board>();
-		
 		DebugHelper.Log("  -- New Island " + number);
 	}
 
@@ -49,6 +45,10 @@ public class Island {
 		DebugHelper.LogWithEnd("Island " + number);
 	}
 	
+	public void crossover() {
+		
+	}
+	
 	public void selection(){
 		// Il faut d'abords creer un tableau de board
 		// Une board appara�t x fois dans le tableau
@@ -60,27 +60,19 @@ public class Island {
 		// toutes les occurences de la board s�lectionn�e sont retir�es
 		// du tableau
 		
-		
-		System.out.println("Avant selection :");
-		System.out.println("------------------------------------");
-		
-
+		ArrayList<Board> boardListSelect = new ArrayList<Board>();
+		selectedBoards = new ArrayList<Board>();
 		int	remainingToSelect = selectionNumber;
-		Board boardSelected;
+		
+		
 		
 		for (Board board : boards){
-			System.out.println(board.number + "  " + board.rating);
 			for (int i=0;i < board.rating;i++){
 				boardListSelect.add(board);
-				System.out.print(board.number);
 			}
-			System.out.println("");
 		}
-		System.out.println("------------------------------------");
-		System.out.println("Apres selection :");
 
 		// Normalement arriv� ici la liste pour la selection de board est construite correctement		
-		System.out.println("------------------------------------");
 		if (boardListSelect.size() == 0)
 			return ;
 		
@@ -88,7 +80,7 @@ public class Island {
 		while (remainingToSelect > 0){
 			
 			int maxValue = boardListSelect.size();
-			boardSelected = boardListSelect.get(rand.nextInt(maxValue));
+			Board boardSelected = boardListSelect.get(rand.nextInt(maxValue));
 			selectedBoards.add(boardSelected);
 			
 			//clean probas
@@ -99,14 +91,12 @@ public class Island {
 			
 			remainingToSelect--;
 		}
-		for (Board board : boardListSelect){
-			System.out.print(board.number);
-		}
-		System.out.println("------------------------------------");
+		
+		DebugHelper.LogWithoutNewline("Island " + number + "   selected Boards : ");
 		for (Board board : selectedBoards){
-			System.out.print(board.number);
+			DebugHelper.LogWithoutNewline(board.number + " ");
 		}
-		System.out.println("------------------------------------");
+		DebugHelper.Log("");
 	}
 
 }

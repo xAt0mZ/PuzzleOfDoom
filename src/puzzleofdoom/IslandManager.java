@@ -37,28 +37,37 @@ public class IslandManager {
 	}
 
 	private void generate() {
-		DebugHelper.LogWithStart("Generating islands");
+		DebugHelper.LogWithStart("GENERATION");
 		for (int i = 0; i < islandsCount; i++) {
 			Island island = new Island(i, boardsCount, piecesCount);
 			island.generate();
 			islands.add(island);
 		}
-		DebugHelper.LogWithEnd("Generating islands");
+		DebugHelper.LogWithEnd("GENERATION");
 	}
 
 	private void evaluate() {
-		DebugHelper.LogWithStart("Evaluating islands");
+		DebugHelper.LogWithStart("EVALUATION");
 		for (Island island : islands) {
 			island.evaluate();
 		}
-		DebugHelper.LogWithEnd("Evaluating islands");
+		DebugHelper.LogWithEnd("EVALUATION");
+	}
+
+	private void crossover() {
+		DebugHelper.LogWithStart("CROSSOVER");
+		for (Island island : islands) {
+			island.crossover();
+		}
+		DebugHelper.LogWithEnd("CROSSOVER");
 	}
 
 	private void selection() {
-		DebugHelper.LogWithStart("Selectioning boards");
+		DebugHelper.LogWithStart("SELECTION");
 		for (Island island : islands) {
 			island.selection();
 		}
+		DebugHelper.LogWithEnd("SELECTION");
 	}
 
 }
