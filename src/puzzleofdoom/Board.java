@@ -40,19 +40,32 @@ public class Board {
 	}
 
 	public void evaluate() {
+		rating = 0;
 		DebugHelper.LogWithStart("Board " + number);
 		for (Piece piece : pieces) {
 			int x = piece.position % 16;
 			int y = piece.position / 16;
-			PiecesHelper.getPieceColorsByNumber(piece.number);
-			if (x == 0)
-				;
-			else if (x == 15)
-				;
-			if (y == 0)
-				;
-			else if (y == 15)
-				;
+			int[] colors = PiecesHelper.getPieceColors(piece);
+
+			// check left
+			if (x == 0 && colors[Direction.WEST.getValue()] == 0)
+				rating += 1;
+			// check top
+			if (y == 0 && colors[Direction.NORTH.getValue()] == 0)
+				rating += 1;
+			// check bottom
+			if (x == 15) {
+				if (colors[Direction.SOUTH.getValue()] == 0)
+					rating += 1;
+			} else {
+				Piece tmp = pieces.get(piece.position + 16);
+			}
+			// check right
+			if (y == 15) {
+				if (colors[Direction.EAST.getValue()] == 0)
+					rating += 1;
+			} else {
+			}
 		}
 		DebugHelper.LogWithEnd("Board " + number);
 	}

@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import puzzleofdoom.Direction;
+import puzzleofdoom.Piece;
+
 public final class PiecesHelper {
 
 	private HashMap<Integer, int[]> colorsSave;
@@ -25,7 +28,7 @@ public final class PiecesHelper {
 		colorsSave = new HashMap<Integer, int[]>();
 
 		try {
-			File file = new File("tiles.txt");
+			File file = new File("resources/tiles.txt");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String line;
@@ -57,11 +60,13 @@ public final class PiecesHelper {
 		// end debug
 	}
 
-	public static int[] getPieceColorsByNumber(int number) {
-		int[] src = getInstance().getColor(number);
+	public static int[] getPieceColors(Piece piece) {
+		int[] src = getInstance().getColor(piece.number);
 		int[] dest = new int[4];
 
-		System.arraycopy(src, 0, dest, 0, src.length);
+		for (int i = 0; i < 4; i++) {
+			dest[i] = src[(i + piece.direction.getValue()) % 4]; 
+		}
 		return dest;
 	}
 
