@@ -30,9 +30,9 @@ public class IslandManager {
 	public void run() {
 		DebugHelper.Log("IslandManager Running");
 		generate();
-		evaluate();
+		// evaluate();
 		// crossover();
-		// selection();
+		 selection();
 		// migrate();
 	}
 

@@ -11,8 +11,8 @@ public class Island {
 	public List<Board> boards;
 	public Long boardsCount;
 	public Long piecesCount;
-	private List<Board> boardListSelect;
-	private List<Board> selectedBoards;
+	public List<Board> boardListSelect;
+	public List<Board> selectedBoards;
 
 	/**
 	 * 
@@ -25,6 +25,9 @@ public class Island {
 		piecesCount = pCount;
 		boardsCount = bCount;
 		boards = new ArrayList<Board>();
+		boardListSelect = new ArrayList<Board>();
+		selectedBoards = new ArrayList<Board>();
+		
 		DebugHelper.Log("  -- New Island " + number);
 	}
 
@@ -45,7 +48,7 @@ public class Island {
 	}
 	
 	public void selection(){
-		int	remainingToSelect = 100; //Remplacer la valeur par une macro / repr�sente le nombre de board restant � selectionner
+		int	remainingToSelect = 10; //Remplacer la valeur par une macro / repr�sente le nombre de board restant � selectionner
 		long minValue = 1;
 		long maxValue = boardsCount+1;
 		long random;
@@ -59,12 +62,21 @@ public class Island {
 		// on selection au hasard une board, une fois s�lectionn�e,
 		// toutes les occurences de la board s�lectionn�e sont retir�es
 		// du tableau
+		System.out.println("Avant selection :");
+		System.out.println("------------------------------------");
 		for (Board board : boards){
 			for (int i=0;i < board.rating;i++){
 				boardListSelect.add(board);
+				System.out.print(board.number);
 			}
 		}
+		System.out.println("------------------------------------");
+		System.out.println("Apres selection :");
+
 		// Normalement arriv� ici la liste pour la selection de board est construite correctement		
+		System.out.println("------------------------------------");
+		if (boardListSelect.size() == 0)
+			return ;
 		while (remainingToSelect > 0){
 			// traitement de la selection
 			random = (long)(Math.random() * (maxValue-minValue)) + minValue;
@@ -76,6 +88,10 @@ public class Island {
 			}
 			remainingToSelect--;
 		}
+		for (Board board : boardListSelect){
+			System.out.print(board.number);
+		}
+		System.out.println("------------------------------------");
 	}
 
 }
