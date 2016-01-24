@@ -46,9 +46,9 @@ public class Board {
 		for (Piece piece : pieces) {
 			int x = piece.position % 16;
 			int y = piece.position / 16;
-			int[] colors = PiecesHelper.getPieceColors(piece);
+			int[] colors = piece.colors;
 
-			DebugHelper.Log("[" + x + " " + y + "]  N="
+			DebugHelper.Log("EVALUATING PIECE : " + "[" + x + " " + y + "]  N="
 					+ colors[Direction.NORTH.getValue()] + "  E="
 					+ colors[Direction.EAST.getValue()] + "  S="
 					+ colors[Direction.SOUTH.getValue()] + "  W="

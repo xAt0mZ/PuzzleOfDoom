@@ -5,6 +5,7 @@ import helpers.DebugHelper;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class Island {
 	public int number;
@@ -13,6 +14,7 @@ public class Island {
 	public Long piecesCount;
 	public List<Board> boardListSelect;
 	public List<Board> selectedBoards;
+	public int selectionNumber = 10;
 
 	/**
 	 * 
@@ -48,11 +50,6 @@ public class Island {
 	}
 	
 	public void selection(){
-		int	remainingToSelect = 2; //Remplacer la valeur par une macro / repr�sente le nombre de board restant � selectionner
-		long minValue = 1;
-		long maxValue = boardsCount+1;
-		long random;
-		Board boardSelected;
 		// Il faut d'abords creer un tableau de board
 		// Une board appara�t x fois dans le tableau
 		// ou x = rating
@@ -62,13 +59,22 @@ public class Island {
 		// on selection au hasard une board, une fois s�lectionn�e,
 		// toutes les occurences de la board s�lectionn�e sont retir�es
 		// du tableau
+		
+		
 		System.out.println("Avant selection :");
 		System.out.println("------------------------------------");
+		
+
+		int	remainingToSelect = selectionNumber;
+		Board boardSelected;
+		
 		for (Board board : boards){
+			System.out.println(board.number + "  " + board.rating);
 			for (int i=0;i < board.rating;i++){
 				boardListSelect.add(board);
 				System.out.print(board.number);
 			}
+			System.out.println("");
 		}
 		System.out.println("------------------------------------");
 		System.out.println("Apres selection :");
@@ -77,18 +83,27 @@ public class Island {
 		System.out.println("------------------------------------");
 		if (boardListSelect.size() == 0)
 			return ;
+		
+		Random rand = new Random();
 		while (remainingToSelect > 0){
-			// traitement de la selection
-			random = (long)(Math.random() * (maxValue-minValue)) + minValue;
-			boardSelected = boardListSelect.get((int)random);
+			
+			int maxValue = boardListSelect.size();
+			boardSelected = boardListSelect.get(rand.nextInt(maxValue));
 			selectedBoards.add(boardSelected);
-			for (Board board : boardListSelect){
-				if (board.number == boardSelected.number)
-					boardListSelect.remove(board);
-			}
+			
+			//clean probas
+			ArrayList<Board> tmpList = new ArrayList<Board>();
+			tmpList.add(boardSelected);
+			boardListSelect.removeAll(tmpList);
+			
+			
 			remainingToSelect--;
 		}
 		for (Board board : boardListSelect){
+			System.out.print(board.number);
+		}
+		System.out.println("------------------------------------");
+		for (Board board : selectedBoards){
 			System.out.print(board.number);
 		}
 		System.out.println("------------------------------------");
