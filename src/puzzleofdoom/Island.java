@@ -30,7 +30,7 @@ public class Island {
 	}
 
 	public void generate() {
-		for (int i = 0; i < boardsCount; i++) {
+		for (long i = 0; i < boardsCount; i++) {
 			Board board = new Board(i, piecesCount);
 			board.generate();
 			boards.add(board);
@@ -47,6 +47,39 @@ public class Island {
 	
 	public void crossover() {
 		
+		DebugHelper.LogWithStart("Island " + number);
+		Random randB1 = new Random();
+		Random randB2 = new Random();
+		int r2 = randB1.nextInt(selectedBoards.size());
+		int r1 = randB2.nextInt(selectedBoards.size());
+		Board b1;
+		Board b2;
+		Board child;
+		long pCount = 0;
+		for (int i=0; i < selectedBoards.size();i++)
+		{
+			boardsCount += 1;
+			b1 = selectedBoards.get(r1);
+			while (r2 == r1){
+				r2 = randB2.nextInt(selectedBoards.size());
+			}
+			b2 = selectedBoards.get(r2);
+			child = new Board(boardsCount, pCount);
+			DebugHelper.Log("Parent are : ["+b1.number+"] and ["+b2.number+"]");
+			DebugHelper.Log("Child is : "+child.number);
+			for (Piece piece : b1.pieces){
+				child.pieces.add(piece);				
+			}
+			for (Piece piece : b2.pieces){
+				if (child.pieces.contains(piece) == false)
+				child.pieces.add(piece);				
+			}
+			child.piecesCount = (long)child.pieces.size();
+			boards.add(child);		
+			r2 = randB1.nextInt(selectedBoards.size());
+			r1 = randB2.nextInt(selectedBoards.size());
+		}
+		DebugHelper.LogWithEnd("Island " + number);
 	}
 	
 	public void selection(){
@@ -86,9 +119,7 @@ public class Island {
 			//clean probas
 			ArrayList<Board> tmpList = new ArrayList<Board>();
 			tmpList.add(boardSelected);
-			boardListSelect.removeAll(tmpList);
-			
-			
+			boardListSelect.removeAll(tmpList);	
 			remainingToSelect--;
 		}
 		

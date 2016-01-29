@@ -1,14 +1,13 @@
 package puzzleofdoom;
 
-import helpers.DebugHelper;
-import helpers.GeneratorHelper;
-import helpers.PiecesHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import helpers.DebugHelper;
+import helpers.GeneratorHelper;
+
 public class Board {
-	public int number;
+	public Long number;
 	public List<Piece> pieces;
 	public Long piecesCount;
 	public int rating;
@@ -20,7 +19,7 @@ public class Board {
 	 * @param pCount
 	 *            : pieces count
 	 */
-	public Board(int num, Long pCount) {
+	public Board(Long num, Long pCount) {
 		number = num;
 		piecesCount = pCount;
 		pieces = new ArrayList<Piece>();
@@ -119,5 +118,13 @@ public class Board {
 		}
 		DebugHelper.Log("  rating :" + rating);
 		DebugHelper.LogWithEnd("Board " + number);
+		if (rating > 400)
+		{
+			for (Piece p : pieces)
+			{
+				DebugHelper.Log("Piece : "+p.number);
+			}
+		}
+		
 	}
 }
