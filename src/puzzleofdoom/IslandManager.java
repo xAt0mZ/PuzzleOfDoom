@@ -30,47 +30,66 @@ public class IslandManager {
 	public void run() {
 		DebugHelper.Log("IslandManager Running");
 		generate();
-		for (int i=0; i<5;i++)
-		{
-			evaluate();
-			selection();
+		evaluate(0);
+		for (int i = 0; i < 5; i++) {	
 			crossover();
+			selection();
+			evaluate(1);
+			merge();
+		}
+		
+		DebugHelper.Log("\n Recapitulatif\n");
+		
+		for (Island i : islands) {
+			DebugHelper.Log("Island : " + i.number);
+			for (Board b : i.boards) {
+				DebugHelper.Log("Board : num=" + b.number + "  rating=" + b.rating);
+			}
 		}
 		// migrate();
+
 	}
 
 	private void generate() {
-		DebugHelper.LogWithStart("GENERATION");
+		DebugHelper.LogWithStart("---------------GENERATION");
 		for (int i = 0; i < islandsCount; i++) {
 			Island island = new Island(i, boardsCount, piecesCount);
 			island.generate();
 			islands.add(island);
 		}
-		DebugHelper.LogWithEnd("GENERATION");
+		DebugHelper.LogWithEnd("---------------GENERATION");
 	}
 
-	private void evaluate() {
-		DebugHelper.LogWithStart("EVALUATION");
+	private void evaluate(int type) {
+		DebugHelper.LogWithStart("---------------EVALUATION");
 		for (Island island : islands) {
-			island.evaluate();
+			island.evaluate(type);
 		}
-		DebugHelper.LogWithEnd("EVALUATION");
+		DebugHelper.LogWithEnd("---------------EVALUATION");
 	}
 
 	private void crossover() {
-		DebugHelper.LogWithStart("CROSSOVER");
+		DebugHelper.LogWithStart("---------------CROSSOVER");
 		for (Island island : islands) {
 			island.crossover();
 		}
-		DebugHelper.LogWithEnd("CROSSOVER");
+		DebugHelper.LogWithEnd("---------------CROSSOVER");
 	}
 
 	private void selection() {
-		DebugHelper.LogWithStart("SELECTION");
+		DebugHelper.LogWithStart("---------------SELECTION");
 		for (Island island : islands) {
 			island.selection();
 		}
-		DebugHelper.LogWithEnd("SELECTION");
+		DebugHelper.LogWithEnd("---------------SELECTION");
+	}
+
+	private void merge() {
+		DebugHelper.LogWithStart("---------------MERGE");
+		for (Island island : islands) {
+			island.merge();
+		}
+		DebugHelper.LogWithEnd("---------------MERGE");
 	}
 
 }

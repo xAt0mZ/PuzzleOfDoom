@@ -29,4 +29,29 @@ public class Piece {
 				+ colors[Direction.SOUTH.getValue()] + "  W="
 				+ colors[Direction.WEST.getValue()]);
 	}
+
+	public void printPiece()
+	{
+		DebugHelper.Log("    -- num:" + number + "  dir:" + direction + "   N="
+				+ colors[Direction.NORTH.getValue()] + "  E="
+				+ colors[Direction.EAST.getValue()] + "  S="
+				+ colors[Direction.SOUTH.getValue()] + "  W="
+				+ colors[Direction.WEST.getValue()]);
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+
+		if (other == null)
+			return false;
+		if (other == this)
+			return true;
+		if (!(other instanceof Piece))
+			return false;
+		Piece p = (Piece) other;
+
+		if (number == p.number)
+			return true;
+		return false;
+	}
 }

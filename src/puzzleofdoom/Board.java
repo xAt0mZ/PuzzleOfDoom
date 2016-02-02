@@ -45,27 +45,28 @@ public class Board {
 			int y = piece.position / 16;
 			int[] colors = piece.colors;
 
-//			DebugHelper.Log("EVALUATING PIECE : " + "[" + x + " " + y + "]  N="
-//					+ colors[Direction.NORTH.getValue()] + "  E="
-//					+ colors[Direction.EAST.getValue()] + "  S="
-//					+ colors[Direction.SOUTH.getValue()] + "  W="
-//					+ colors[Direction.WEST.getValue()]);
+			// DebugHelper.Log("EVALUATING PIECE : " + "[" + x + " " + y +
+			// "]  N="
+			// + colors[Direction.NORTH.getValue()] + "  E="
+			// + colors[Direction.EAST.getValue()] + "  S="
+			// + colors[Direction.SOUTH.getValue()] + "  W="
+			// + colors[Direction.WEST.getValue()]);
 
 			// check left
 			if (x == 0 && colors[Direction.WEST.getValue()] == 0) {
-//				DebugHelper.Log(" -- +1 --");
+				// DebugHelper.Log(" -- +1 --");
 				rating += 1;
 			}
 			// check top
 			if (y == 0 && colors[Direction.NORTH.getValue()] == 0) {
-//				DebugHelper.Log(" -- +1 --");
+				// DebugHelper.Log(" -- +1 --");
 				rating += 1;
 			}
 			// check right
 			if (x == 15) {
 				if (colors[Direction.SOUTH.getValue()] == 0) {
 					rating += 1;
-//					DebugHelper.Log(" -- +1 --");
+					// DebugHelper.Log(" -- +1 --");
 				}
 			} else {
 				// int[] tmp = PiecesHelper.getPieceColors(pieces
@@ -73,19 +74,19 @@ public class Board {
 
 				Piece tmp = pieces.get(piece.position + 1);
 
-//				DebugHelper.Log(tmp.number + "   [" + tmp.position % 16 + " "
-//						+ tmp.position / 16 + "]  N="
-//						+ tmp.colors[Direction.NORTH.getValue()] + "  E="
-//						+ tmp.colors[Direction.EAST.getValue()] + "  S="
-//						+ tmp.colors[Direction.SOUTH.getValue()] + "  W="
-//						+ tmp.colors[Direction.WEST.getValue()]);
-//				DebugHelper.Log("droite cmp : "
-//						+ colors[Direction.EAST.getValue()] + "  "
-//						+ tmp.colors[Direction.WEST.getValue()]);
+				// DebugHelper.Log(tmp.number + "   [" + tmp.position % 16 + " "
+				// + tmp.position / 16 + "]  N="
+				// + tmp.colors[Direction.NORTH.getValue()] + "  E="
+				// + tmp.colors[Direction.EAST.getValue()] + "  S="
+				// + tmp.colors[Direction.SOUTH.getValue()] + "  W="
+				// + tmp.colors[Direction.WEST.getValue()]);
+				// DebugHelper.Log("droite cmp : "
+				// + colors[Direction.EAST.getValue()] + "  "
+				// + tmp.colors[Direction.WEST.getValue()]);
 
 				if (colors[Direction.EAST.getValue()] == tmp.colors[Direction.WEST
 						.getValue()]) {
-					//DebugHelper.Log(" -- +1 --");
+					// DebugHelper.Log(" -- +1 --");
 					rating += 1;
 				}
 			}
@@ -97,34 +98,49 @@ public class Board {
 				// int[] tmp = PiecesHelper.getPieceColors(pieces
 				// .get(piece.position + 16));
 				Piece tmp = pieces.get(piece.position + 16);
-				
-//				DebugHelper.Log(tmp.number + "   [" + tmp.position % 16 + " "
-//						+ tmp.position / 16 + "]  N="
-//						+ tmp.colors[Direction.NORTH.getValue()] + "  E="
-//						+ tmp.colors[Direction.EAST.getValue()] + "  S="
-//						+ tmp.colors[Direction.SOUTH.getValue()] + "  W="
-//						+ tmp.colors[Direction.WEST.getValue()]);
-//				DebugHelper.Log("dessous cmp : "
-//						+ colors[Direction.SOUTH.getValue()] + "  "
-//						+ tmp.colors[Direction.NORTH.getValue()]);
+
+				// DebugHelper.Log(tmp.number + "   [" + tmp.position % 16 + " "
+				// + tmp.position / 16 + "]  N="
+				// + tmp.colors[Direction.NORTH.getValue()] + "  E="
+				// + tmp.colors[Direction.EAST.getValue()] + "  S="
+				// + tmp.colors[Direction.SOUTH.getValue()] + "  W="
+				// + tmp.colors[Direction.WEST.getValue()]);
+				// DebugHelper.Log("dessous cmp : "
+				// + colors[Direction.SOUTH.getValue()] + "  "
+				// + tmp.colors[Direction.NORTH.getValue()]);
 
 				if (colors[Direction.SOUTH.getValue()] == tmp.colors[Direction.NORTH
 						.getValue()]) {
-//					DebugHelper.Log(" -- +1 --");
+					// DebugHelper.Log(" -- +1 --");
 					rating += 1;
 				}
 			}
-			//DebugHelper.Log("");
+			// DebugHelper.Log("");
 		}
 		DebugHelper.Log("  rating :" + rating);
-		DebugHelper.LogWithEnd("Board " + number);
-		if (rating > 400)
-		{
-			for (Piece p : pieces)
-			{
-				DebugHelper.Log("Piece : "+p.number);
+		if (rating > 400) {
+			for (Piece p : pieces) {
+				p.printPiece();
 			}
 		}
-		
+		DebugHelper.LogWithEnd("Board " + number);
+
 	}
+
+	@Override
+	public boolean equals(Object other) {
+
+		if (other == null)
+			return false;
+		if (other == this)
+			return true;
+		if (!(other instanceof Board))
+			return false;
+		Board p = (Board) other;
+
+		if (number == p.number)
+			return true;
+		return false;
+	}
+
 }
