@@ -29,7 +29,7 @@ public class Island {
 		piecesCount = pCount;
 		boardsCount = bCount;
 		boards = new ArrayList<Board>();
-		DebugHelper.Log("  -- New Island " + number);
+		DebugHelper.Log("i:" + number);
 	}
 
 	public void generate() {
@@ -41,16 +41,16 @@ public class Island {
 	}
 
 	public void evaluate(int type) {
-		DebugHelper.LogWithStart("Island " + number);
+//		DebugHelper.LogWithStart("Island " + number);
 		for (Board board : (type == 0 ? boards : childrenBoards)) {
 			board.evaluate();
 		}
-		DebugHelper.LogWithEnd("Island " + number);
+//		DebugHelper.LogWithEnd("Island " + number);
 	}
 
 	public void crossover() {
 
-		DebugHelper.LogWithStart("Island " + number);
+		//DebugHelper.LogWithStart("Island " + number);
 		Random random = new Random();
 
 		Board b1;
@@ -81,7 +81,7 @@ public class Island {
 			} while (b1.equals(b2));
 
 			child = new Board(0l, piecesCount);
-			DebugHelper.Log("Parent are : [" + b1.number + "] and ["
+			DebugHelper.Log("p:[" + b1.number + "]["
 					+ b2.number + "]");
 
 			ArrayList<Integer> remainingPositions = new ArrayList<Integer>();
@@ -103,21 +103,21 @@ public class Island {
 				if (!remainingNumbers.contains(p.number))
 				{
 					remainingPositions.add(i);
-					DebugHelper.Log("    to refill position : " + i);
+//					DebugHelper.Log("    to refill position : " + i);
 				}
 				else
 				{
-					DebugHelper.Log(" adding at position " + i + " the number " + p.number);
+//					DebugHelper.Log(" adding at position " + i + " the number " + p.number);
 					child.pieces.add(p);
 					final Piece finalp = p;
 					remainingNumbers.removeIf(s -> s == finalp.number);
 				}
 			}
 			
-			for (Integer i : remainingNumbers)
-				DebugHelper.Log("   remaining number " + i);
-			for (Integer i : remainingPositions)
-				DebugHelper.Log("   remaining position " + i);
+//			for (Integer i : remainingNumbers)
+//				DebugHelper.Log("   remaining number " + i);
+//			for (Integer i : remainingPositions)
+//				DebugHelper.Log("   remaining position " + i);
 			
 			for (Integer i : remainingNumbers) {
 				int r = random.nextInt() % 2;
@@ -128,7 +128,7 @@ public class Island {
 					p = b1.pieces.stream().filter(s -> s.number == i).findFirst().get();
 				p.position = remainingPositions.get(0);
 				remainingPositions.remove(0);
-				DebugHelper.Log("   adding number " + p.number + " at pos " + p.position);
+//				DebugHelper.Log("   adding number " + p.number + " at pos " + p.position);
 				child.pieces.add(p);
 			}
 			
@@ -138,7 +138,7 @@ public class Island {
 			childrenBoards.add(child);
 			remainingToCreate--;
 		}
-		DebugHelper.LogWithEnd("Island " + number);
+//		DebugHelper.LogWithEnd("Island " + number);
 	}
 
 	public void selection() {
@@ -181,12 +181,12 @@ public class Island {
 			remainingToSelect--;
 		}
 
-		DebugHelper.LogWithoutNewline("Island " + number
-				+ "   selected Boards : ");
-		for (Board board : selectedBoards) {
-			DebugHelper.LogWithoutNewline(board.number + " ");
-		}
-		DebugHelper.Log("");
+//		DebugHelper.LogWithoutNewline("Island " + number
+//				+ "   selected Boards : ");
+//		for (Board board : selectedBoards) {
+//			DebugHelper.LogWithoutNewline(board.number + " ");
+//		}
+//		DebugHelper.Log("");
 	}
 	
 	public void merge()
@@ -197,9 +197,9 @@ public class Island {
 		for (int i = 0; i < boards.size(); i++)
 		{
 			boards.get(i).number = (long)i;
-			DebugHelper.Log(" rating : " + boards.get(i).rating);
+			DebugHelper.Log(boards.get(i).number + " r:" + boards.get(i).rating);
 		}
-		DebugHelper.Log("merged list size : " + boards.size());
+		DebugHelper.Log("list:" + boards.size());
 	}
 
 }

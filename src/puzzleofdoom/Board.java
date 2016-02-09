@@ -24,10 +24,10 @@ public class Board {
 		piecesCount = pCount;
 		pieces = new ArrayList<Piece>();
 		rating = 0;
-		DebugHelper.Log("      -- New Board " + number);
 	}
 
 	public void generate() {
+		DebugHelper.Log("b:" + number);
 		GeneratorHelper.resetPositionCounter();
 		for (int i = 0; i < piecesCount; i++) {
 			Piece piece = new Piece(i, GeneratorHelper.nextRandomPosition(),
@@ -39,7 +39,7 @@ public class Board {
 
 	public void evaluate() {
 		rating = 0;
-		DebugHelper.LogWithStart("Board " + number);
+		// DebugHelper.LogWithStart("Board " + number);
 		for (Piece piece : pieces) {
 			int x = piece.position % 16;
 			int y = piece.position / 16;
@@ -117,14 +117,20 @@ public class Board {
 			}
 			// DebugHelper.Log("");
 		}
-		DebugHelper.Log("  rating :" + rating);
-		if (rating > 400) {
-			for (Piece p : pieces) {
-				p.printPiece();
-			}
+		DebugHelper.Log("r:" + rating);
+		if (rating >= 400) {
+			printBoard();
+			if (rating == 544)
+				IslandManager.hasSolution = true;
 		}
-		DebugHelper.LogWithEnd("Board " + number);
+		// DebugHelper.LogWithEnd("Board " + number);
 
+	}
+
+	public void printBoard() {
+		for (Piece p : pieces) {
+			p.printPiece();
+		}
 	}
 
 	@Override

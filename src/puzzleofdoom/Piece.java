@@ -23,19 +23,15 @@ public class Piece {
 		number = num;
 		direction = dir;
 		colors = PiecesHelper.getPieceColors(this);
-		DebugHelper.Log("    -- num:" + num + "  dir:" + dir + "   N="
-				+ colors[Direction.NORTH.getValue()] + "  E="
-				+ colors[Direction.EAST.getValue()] + "  S="
-				+ colors[Direction.SOUTH.getValue()] + "  W="
-				+ colors[Direction.WEST.getValue()]);
+		printPiece();
 	}
 
 	public void printPiece()
 	{
-		DebugHelper.Log("    -- num:" + number + "  dir:" + direction + "   N="
-				+ colors[Direction.NORTH.getValue()] + "  E="
-				+ colors[Direction.EAST.getValue()] + "  S="
-				+ colors[Direction.SOUTH.getValue()] + "  W="
+		DebugHelper.Log("n:" + number + " d:" + direction + " N:"
+				+ colors[Direction.NORTH.getValue()] + " E:"
+				+ colors[Direction.EAST.getValue()] + " S:"
+				+ colors[Direction.SOUTH.getValue()] + " W:"
 				+ colors[Direction.WEST.getValue()]);
 	}
 	

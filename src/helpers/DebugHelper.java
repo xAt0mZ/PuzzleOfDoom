@@ -60,14 +60,14 @@ public final class DebugHelper {
 	}
 	
 	public static void LogWithStart(String str) {
-		System.out.print("\n[START] ");
-		getInstance().writer.print("\n[START] ");
+		System.out.print("[S]");
+		getInstance().writer.print("[S]");
 		Log(str);
 	}
 	
 	public static void LogWithEnd(String str) {
-		System.out.print("[END] ");
-		getInstance().writer.print("[END] ");
-		Log(str + "\n");
+		System.out.print("[E]");
+		getInstance().writer.print("[E]");
+		Log(str);
 	}
 }
