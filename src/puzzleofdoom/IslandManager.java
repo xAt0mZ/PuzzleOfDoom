@@ -13,6 +13,7 @@ public class IslandManager {
 	public int coeffRepartition;
 	static public boolean hasSolution = false;
 
+
 	/**
 	 * 
 	 * @param count
@@ -40,6 +41,7 @@ public class IslandManager {
 			evaluate(1);
 			merge();
 			migrate();
+
 		}
 
 	}
@@ -86,54 +88,48 @@ public class IslandManager {
 		DebugHelper.LogWithEnd("MERGE");
 	}
 
-	private void migrate(){
+	private void migrate() {
 		boolean needMigration = false;
 		int i = 0;
 		int j = 0;
 		int k = 0;
 		ArrayList<ArrayList<Board>> boardToMigrate = new ArrayList<ArrayList<Board>>();
-		
+
 		DebugHelper.LogWithStart("MIGRATE");
-		for (Island island : islands){
-			if (island.needToMigrate()==true){
+		for (Island island : islands) {
+			if (island.needToMigrate() == true) {
 				needMigration = true;
 				break;
 			}
 		}
-		if (needMigration == true){
-			for (Island island : islands){
-				boardToMigrate.add(island.migrate(islandsCount, coeffRepartition));
+		if (needMigration == true) {
+			for (Island island : islands) {
+				boardToMigrate.add(island.migrate(islandsCount,
+						coeffRepartition));
 			}
 		}
-		
+
 		// Arriver ici la liste de liste de board a migrer est remplie
-		for (ArrayList<Board> boardList : boardToMigrate)
-		{
-			for (Island island : islands)
-			{
-				if (i != j)
-				{
-					while (k < coeffRepartition && boardList.size() > 0)
-					{
+		for (ArrayList<Board> boardList : boardToMigrate) {
+			for (Island island : islands) {
+				if (i != j) {
+					while (k < coeffRepartition && boardList.size() > 0) {
 						// On ajoute
-						if (j == 9)
-						{
-							DebugHelper.Log("debug");
-						}
-						DebugHelper.Log("Move : ");
-						DebugHelper.Log(boardList.get(k).number.toString());
-						DebugHelper.Log("From isle : "+i);
-						DebugHelper.Log("To isle :"+j);
-						island.boards.add(boardList.get(k));
-						boardList.remove(k);
+//						DebugHelper.Log("Move : ");
+//						DebugHelper.Log(boardList.get(0).number.toString());
+//						DebugHelper.Log("From isle : " + i);
+//						DebugHelper.Log("To isle :" + j);
+						island.boards.add(boardList.get(0));
+						boardList.remove(0);
 						k++;
 					}
 				}
 				k = 0;
 				j++;
-				/*for (int x = 0; x < island.boards.size(); x++)
-					island.boards.get(x).number = (long)i;
-				*/
+				/*
+				 * for (int x = 0; x < island.boards.size(); x++)
+				 * island.boards.get(x).number = (long)i;
+				 */
 			}
 			j = 0;
 			i++;

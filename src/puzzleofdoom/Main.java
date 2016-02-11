@@ -37,26 +37,25 @@ public class Main {
 					t.join();
 
 					DebugHelper.Log("\nRecapitulatif");
-					
+
 					List<Board> maxList = new ArrayList<Board>();
-					
-					
+
 					for (Island i : manager.islands) {
 						DebugHelper.Log("\ni:" + i.number);
-						
-						Board maxb = new Board(new Long(0),new Long(0));
-						
+
+						Board maxb = new Board(new Long(0), new Long(0));
+
 						for (Board b : i.boards) {
 							DebugHelper.Log("b:" + b.number + " r:" + b.rating);
 							if (b.rating > maxb.rating)
 								maxb = b;
 						}
 						maxList.add(maxb);
-						
+
 					}
-					
+
 					DebugHelper.Log("\nBEST VALUES");
-					
+
 					for (Board b : maxList) {
 						DebugHelper.Log("\nr:" + b.rating);
 						b.printBoard();
@@ -68,7 +67,6 @@ public class Main {
 			}
 		});
 		t.start();
-
 	}
 
 }
