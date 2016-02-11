@@ -19,6 +19,6 @@ public class PiecesComparator implements Comparator<Piece> {
 	
     @Override
     public int compare(Piece o1, Piece o2) {
-    	return (o1.number - o2.number);
+    	return (o1.position - o2.position);
     }
 }
