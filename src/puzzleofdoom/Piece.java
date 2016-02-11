@@ -23,7 +23,7 @@ public class Piece {
 		number = num;
 		direction = dir;
 		colors = PiecesHelper.getPieceColors(this);
-		printPiece();
+		//printPiece();
 	}
 
 	public void printPiece()

@@ -34,6 +34,7 @@ public final class PiecesHelper {
 			String line;
 			int key = 0;
 			while ((line = bufferedReader.readLine()) != null) {
+//				DebugHelper.Log("LINE[" + line + "]");
 				int[] tab = new int[4];
 				String[] splited = line.split("\\s+");
 				for (int i = 0; i < 4; i++) {

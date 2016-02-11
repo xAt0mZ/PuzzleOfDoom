@@ -10,7 +10,7 @@ public class IslandManager {
 	public Long islandsCount;
 	public Long boardsCount;
 	public Long piecesCount;
-	static public boolean hasSolution = false;
+	static public boolean hasSolution;
 
 	/**
 	 * 
@@ -29,26 +29,17 @@ public class IslandManager {
 	}
 
 	public void run() {
-		DebugHelper.Log("IslandManager Running");
 		generate();
 		evaluate(0);
-		while (!hasSolution) {
+		while (!hasSolution && !Thread.currentThread().isInterrupted()) {
 			DebugHelper.Log("\n>LOOP<");
 			crossover();
 			selection();
 			evaluate(1);
 			merge();
-			//migrate();
+			// migrate();
 		}
-		
-		DebugHelper.Log("\nRecapitulatif\n");
-		
-		for (Island i : islands) {
-			DebugHelper.Log("Island : " + i.number);
-			for (Board b : i.boards) {
-				DebugHelper.Log("Board : num=" + b.number + "  rating=" + b.rating);
-			}
-		}
+
 	}
 
 	private void generate() {

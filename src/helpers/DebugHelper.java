@@ -29,17 +29,12 @@ public final class DebugHelper {
 			String strDate = sdfDate.format(now);
 			String fileName = "logs/logfile_" + strDate + ".txt";
 			writer = new PrintWriter(fileName, "UTF-8");
-			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-				public void run() {
-					DebugHelper.close();
-				}
-			}));
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static void close() {
+	public static void close() {
 		if (getInstance().writer != null)
 			getInstance().writer.close();
 	}

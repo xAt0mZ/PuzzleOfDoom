@@ -27,14 +27,14 @@ public class Board {
 	}
 
 	public void generate() {
-		DebugHelper.Log("b:" + number);
+		// DebugHelper.Log("b:" + number);
 		GeneratorHelper.resetPositionCounter();
 		for (int i = 0; i < piecesCount; i++) {
 			Piece piece = new Piece(i, GeneratorHelper.nextRandomPosition(),
 					GeneratorHelper.randomDirection());
 			pieces.add(piece);
 		}
-		DebugHelper.Log("");
+		// DebugHelper.Log("");
 	}
 
 	public void evaluate() {
@@ -117,7 +117,7 @@ public class Board {
 			}
 			// DebugHelper.Log("");
 		}
-		DebugHelper.Log("r:" + rating);
+		//DebugHelper.Log("r:" + rating);
 		if (rating >= 400) {
 			printBoard();
 			if (rating == 544)

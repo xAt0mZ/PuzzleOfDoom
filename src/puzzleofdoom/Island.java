@@ -29,7 +29,7 @@ public class Island {
 		piecesCount = pCount;
 		boardsCount = bCount;
 		boards = new ArrayList<Board>();
-		DebugHelper.Log("i:" + number);
+		// DebugHelper.Log("i:" + number);
 	}
 
 	public void generate() {
@@ -41,16 +41,17 @@ public class Island {
 	}
 
 	public void evaluate(int type) {
-//		DebugHelper.LogWithStart("Island " + number);
+		// DebugHelper.LogWithStart("Island " + number);
+		// DebugHelper.Log("\ni:" + number);
 		for (Board board : (type == 0 ? boards : childrenBoards)) {
 			board.evaluate();
 		}
-//		DebugHelper.LogWithEnd("Island " + number);
+		// DebugHelper.LogWithEnd("Island " + number);
 	}
 
 	public void crossover() {
 
-		//DebugHelper.LogWithStart("Island " + number);
+		// DebugHelper.LogWithStart("Island " + number);
 		Random random = new Random();
 
 		Board b1;
@@ -67,13 +68,11 @@ public class Island {
 			}
 		}
 
-		
 		// liste de nombres de 0 à piecesCount
 		ArrayList<Integer> remainingNumbersSave = new ArrayList<Integer>();
 		for (int i = 0; i < piecesCount; i++)
 			remainingNumbersSave.add(i);
 
-		
 		while (remainingToCreate > 0) {
 			b1 = boardsCopy.get(random.nextInt(boardsCopy.size()));
 			do {
@@ -81,12 +80,12 @@ public class Island {
 			} while (b1.equals(b2));
 
 			child = new Board(0l, piecesCount);
-			DebugHelper.Log("p:[" + b1.number + "]["
-					+ b2.number + "]");
+			// DebugHelper.Log("p:[" + b1.number + "][" + b2.number + "]");
 
 			ArrayList<Integer> remainingPositions = new ArrayList<Integer>();
-			ArrayList<Integer> remainingNumbers = (ArrayList<Integer>)remainingNumbersSave.clone();
-			
+			ArrayList<Integer> remainingNumbers = (ArrayList<Integer>) remainingNumbersSave
+					.clone();
+
 			for (int i = 0; i < piecesCount; i++) {
 				int r = random.nextInt() % 2;
 				Piece p;
@@ -100,45 +99,46 @@ public class Island {
 						p = b1.pieces.get(i);
 				}
 
-				if (!remainingNumbers.contains(p.number))
-				{
+				if (!remainingNumbers.contains(p.number)) {
 					remainingPositions.add(i);
-//					DebugHelper.Log("    to refill position : " + i);
-				}
-				else
-				{
-//					DebugHelper.Log(" adding at position " + i + " the number " + p.number);
+					// DebugHelper.Log("    to refill position : " + i);
+				} else {
+					// DebugHelper.Log(" adding at position " + i +
+					// " the number " + p.number);
 					child.pieces.add(p);
 					final Piece finalp = p;
 					remainingNumbers.removeIf(s -> s == finalp.number);
 				}
 			}
-			
-//			for (Integer i : remainingNumbers)
-//				DebugHelper.Log("   remaining number " + i);
-//			for (Integer i : remainingPositions)
-//				DebugHelper.Log("   remaining position " + i);
-			
+
+			// for (Integer i : remainingNumbers)
+			// DebugHelper.Log("   remaining number " + i);
+			// for (Integer i : remainingPositions)
+			// DebugHelper.Log("   remaining position " + i);
+
 			for (Integer i : remainingNumbers) {
 				int r = random.nextInt() % 2;
 				Piece p;
 				if (r == 0)
-					p = b1.pieces.stream().filter(s -> s.number == i).findFirst().get();
+					p = b1.pieces.stream().filter(s -> s.number == i)
+							.findFirst().get();
 				else
-					p = b1.pieces.stream().filter(s -> s.number == i).findFirst().get();
+					p = b1.pieces.stream().filter(s -> s.number == i)
+							.findFirst().get();
 				p.position = remainingPositions.get(0);
 				remainingPositions.remove(0);
-//				DebugHelper.Log("   adding number " + p.number + " at pos " + p.position);
+				// DebugHelper.Log("   adding number " + p.number + " at pos " +
+				// p.position);
 				child.pieces.add(p);
 			}
-			
-			//reorder pieces list by position
+
+			// reorder pieces list by position
 			child.pieces.sort(PiecesComparator.getInstance());
 
 			childrenBoards.add(child);
 			remainingToCreate--;
 		}
-//		DebugHelper.LogWithEnd("Island " + number);
+		// DebugHelper.LogWithEnd("Island " + number);
 	}
 
 	public void selection() {
@@ -181,25 +181,24 @@ public class Island {
 			remainingToSelect--;
 		}
 
-//		DebugHelper.LogWithoutNewline("Island " + number
-//				+ "   selected Boards : ");
-//		for (Board board : selectedBoards) {
-//			DebugHelper.LogWithoutNewline(board.number + " ");
-//		}
-//		DebugHelper.Log("");
+		// DebugHelper.LogWithoutNewline("Island " + number
+		// + "   selected Boards : ");
+		// for (Board board : selectedBoards) {
+		// DebugHelper.LogWithoutNewline(board.number + " ");
+		// }
+		// DebugHelper.Log("");
 	}
-	
-	public void merge()
-	{
+
+	public void merge() {
 		boards.clear();
 		boards.addAll(childrenBoards);
 		boards.addAll(selectedBoards);
-		for (int i = 0; i < boards.size(); i++)
-		{
-			boards.get(i).number = (long)i;
-			DebugHelper.Log(boards.get(i).number + " r:" + boards.get(i).rating);
+		for (int i = 0; i < boards.size(); i++) {
+			boards.get(i).number = (long) i;
+			// DebugHelper.Log(boards.get(i).number + " r:" +
+			// boards.get(i).rating);
 		}
-		DebugHelper.Log("list:" + boards.size());
+		// DebugHelper.Log("list:" + boards.size());
 	}
 
 }
