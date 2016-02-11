@@ -11,6 +11,7 @@ public class Island {
 	public List<Board> boards;
 	public Long boardsCount;
 	public Long piecesCount;
+	public float limitToMigrate;
 
 	public List<Board> selectedBoards;
 	public List<Board> childrenBoards;
@@ -30,6 +31,7 @@ public class Island {
 		boardsCount = bCount;
 		boards = new ArrayList<Board>();
 		// DebugHelper.Log("i:" + number);
+		limitToMigrate = 2;
 	}
 
 	public void generate() {
@@ -200,5 +202,51 @@ public class Island {
 		}
 		// DebugHelper.Log("list:" + boards.size());
 	}
+	
+	public boolean needToMigrate()
+	{
+		// Si X% des boards avec m�me rating = migrate
+		float boardPercent = 0;
+		float tmpPercent = 0;
+		int cmp = 0;
+		
+		for (Board board : boards){
+			for(Board board2 : boards){
+				if (board!=board2 && board.rating == board2.rating)
+					cmp++;
+			}
+			tmpPercent = cmp * boards.size() / 100;
+			if (tmpPercent > boardPercent){
+				boardPercent = tmpPercent;
+			}
+		}
+		if (boardPercent >= limitToMigrate)
+			return true;
+		return false;
+		
+	}
+	
+	public ArrayList<Board> migrate(long nbIsland, int coeffRepartition)
+	{
+		DebugHelper.LogWithStart("MIGRATE isle :");
+		DebugHelper.Log(number);
+		// nbIsland = le nombre total d'�les existantes
+		float percentToKeep = 100-((nbIsland-1)*coeffRepartition);
+		int nbToKeep = (int)(boards.size()*percentToKeep/100);
+		int	nbToMigrate = boards.size() - nbToKeep;
+		Random random = new Random();
+		int boardToSelect = 0;
 
+		ArrayList<Board> toMigrate = new ArrayList<Board>();
+		for (int i=1; i < ((nbIsland-1)*coeffRepartition);i++){
+			boardToSelect = random.nextInt(boards.size());
+			toMigrate.add(boards.get(boardToSelect));
+			boards.remove(boardToSelect);
+		}
+		for (Board b2 : toMigrate){
+			DebugHelper.Log(b2.number.toString());
+		}
+		DebugHelper.LogWithEnd("MIGRATE isle :");
+		return toMigrate;
+	}
 }
